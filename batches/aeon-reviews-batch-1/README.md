@@ -38,7 +38,7 @@ Each row has:
 ## Verify any row
 
 1. Open `pull_request_url` and confirm the commit in `commit` belongs to that pull request.
-2. Open `settlement_url` to see the USDC payment on Base.
+2. Open `settlement_url` to inspect the Base payment. Where recorded, verify the token contract, decimals and exact amount against the explicit settlement fields; payments may be USDC or CULTOS.
 3. Open `record_url` to read the full original review: every finding, the files reviewed and the limitations.
 
 ## Integrity
@@ -46,10 +46,25 @@ Each row has:
 SHA-256 of `cultos-intel-aeon-reviews-batch-1.jsonl`:
 
 ```
-9d312c7075b161de7bdf65070c1c0d3f2e895b5dbc53a780b41b2fb98ae018c7
+c35fe62778327a1dedb77596f7677765f7d01e8931b65025f990d0d68208177f
 ```
 
 ## Limits
 
 - Reviews are AI-generated. An approve-ready verdict means the agent found no blocking issues in the files it reviewed; it is not a security guarantee.
 - The sample is small and includes public repositories only.
+
+## Payment metadata correction
+
+Original commit: d8620f68ed0215d573a55a3ed7296da2b26597a8. Source registry snapshot: 999bce25d1a5c67e6b1720d9e5f71b9f2f7fa238.
+
+The 13 recorded amounts comprise 10 USDC payments and 3 CULTOS payments.
+The three CULTOS rows now have null price_usdc; no USD conversion is inferred.
+Eight rows lack source amount/asset metadata and remain null, not zero.
+Exact base-unit amounts are strings; settlement_amount is an exact decimal string.
+CSV adds the same five settlement fields. Other review fields are unchanged.
+Missing source payment metadata is not reconstructed or estimated.
+No claim is made that a successful payment validates the substantive review findings.
+The original publisher must version/adopt this correction and update the referenced pod evidence.
+
+CSV SHA-256: c09d51bce291b37cdf3ee5c2c95a38d9ec8cf5f30c6adca28316f1843e09f761
